@@ -1,4 +1,4 @@
-package com.prova;
+package prova;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -59,7 +59,7 @@ public class ProvaMainClass {
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        final String spreadsheetId = props.getProperty("spreadsheetId");
+        final String spreadsheetId = props.getProperty("spreadsheetIdBurraco");
         final String sheetName = props.getProperty("sheetName");
         final String range = sheetName.concat("!A1");
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
