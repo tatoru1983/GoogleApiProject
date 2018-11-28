@@ -18,6 +18,7 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
 import entity.InfoUtenza;
+import utility.ChartUtility;
 import utility.GoogleUtility;
 import utility.PropertiesUtility;
 
@@ -55,22 +56,12 @@ public class RunnerCashCollect {
 				utenze.add(utenza);
 			}
 
-			DefaultPieDataset dataset = new DefaultPieDataset( );
+			DefaultPieDataset dataset = new DefaultPieDataset();
 			for(InfoUtenza utenza : utenze) {
-				dataset.setValue(utenza.getUtenza(), utenza.getSomma() );
+				dataset.setValue(utenza.getUtenza(), utenza.getSomma());
 			}
-
-			JFreeChart chart = ChartFactory.createPieChart(
-					"Consumi totali",   // chart title
-					dataset,          // data
-					true,             // include legend
-					true,
-					false);
-
-			int width = 640;   /* Width of the image */
-			int height = 480;  /* Height of the image */ 
-			File pieChart = new File( "ConsumiTotali.jpeg" ); 
-			ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
+			//Pie Chart globale
+			ChartUtility.createPieChart("Spese Anno 2018", dataset, "spese2018");
 		}
 		System.out.println("Finito!");
 	}
