@@ -17,6 +17,7 @@ public class InfoUtenza {
 	private BigDecimal ottobre = new BigDecimal(0);
 	private BigDecimal novembre = new BigDecimal(0);
 	private BigDecimal dicembre = new BigDecimal(0);
+	private String year;
 	
 	public InfoUtenza(List row){
 		super();
@@ -45,6 +46,37 @@ public class InfoUtenza {
 			this.novembre = getBGValue(row.get(11));
 		if(row.size()>12)
 			this.dicembre = getBGValue(row.get(12));
+	}
+	
+	public InfoUtenza(List row, String year){
+		super();
+		this.utenza = row.get(0).toString();
+		if(row.size()>1)
+			this.gennaio = getBGValue(row.get(1));
+		if(row.size()>2)
+			this.febbraio = getBGValue(row.get(2));
+		if(row.size()>3)
+			this.marzo = getBGValue(row.get(3));
+		if(row.size()>4)
+			this.aprile = getBGValue(row.get(4));
+		if(row.size()>5)
+			this.maggio = getBGValue(row.get(5));
+		if(row.size()>6)
+			this.giugno = getBGValue(row.get(6));
+		if(row.size()>7)
+			this.luglio = getBGValue(row.get(7));
+		if(row.size()>8)
+			this.agosto = getBGValue(row.get(8));
+		if(row.size()>9)
+			this.settembre = getBGValue(row.get(9));
+		if(row.size()>10)
+			this.ottobre = getBGValue(row.get(10));
+		if(row.size()>11)
+			this.novembre = getBGValue(row.get(11));
+		if(row.size()>12)
+			this.dicembre = getBGValue(row.get(12));
+		
+		this.year = year;
 	}
 	
 	public String getUtenza() {
@@ -149,5 +181,13 @@ public class InfoUtenza {
 				+ ", aprile=" + aprile + ", maggio=" + maggio + ", giugno=" + giugno + ", luglio=" + luglio
 				+ ", agosto=" + agosto + ", settembre=" + settembre + ", ottobre=" + ottobre + ", novembre=" + novembre
 				+ ", dicembre=" + dicembre + "]";
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 }
