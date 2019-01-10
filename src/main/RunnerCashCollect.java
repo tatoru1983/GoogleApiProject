@@ -38,6 +38,7 @@ public class RunnerCashCollect {
 	};
 
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
+		String folder = args[0];
 		// Build a new authorized API client service.
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 		final String spreadsheetId = props.getProperty("spreadsheetIdSpese");
@@ -113,7 +114,7 @@ public class RunnerCashCollect {
 				spese.add(month);
 			}
 		}
-		JsonUtility.writeFileFromJSONArray(spese, "spese");
+		JsonUtility.writeFileFromJSONArray(spese, "spese", folder);
 		
 		System.out.println("Finito!");
 	}

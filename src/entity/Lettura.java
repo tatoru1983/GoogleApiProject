@@ -51,29 +51,29 @@ public class Lettura {
 	public Lettura(List row, String year){
 		super();
 		this.utenza = row.get(0).toString();
-		if(row.size()>1)
+		if(row.size()>1 && !getBGValue(row.get(1)).equals(new BigDecimal(0)))
 			this.gennaio = getBGValue(row.get(1));
-		if(row.size()>2)
+		if(row.size()>2 && !getBGValue(row.get(2)).equals(new BigDecimal(0)))
 			this.febbraio = getBGValue(row.get(2));
-		if(row.size()>3)
+		if(row.size()>3 && !getBGValue(row.get(3)).equals(new BigDecimal(0)))
 			this.marzo = getBGValue(row.get(3));
-		if(row.size()>4)
+		if(row.size()>4 && !getBGValue(row.get(4)).equals(new BigDecimal(0)))
 			this.aprile = getBGValue(row.get(4));
-		if(row.size()>5)
+		if(row.size()>5 && !getBGValue(row.get(5)).equals(new BigDecimal(0)))
 			this.maggio = getBGValue(row.get(5));
-		if(row.size()>6)
+		if(row.size()>6 && !getBGValue(row.get(6)).equals(new BigDecimal(0)))
 			this.giugno = getBGValue(row.get(6));
-		if(row.size()>7)
+		if(row.size()>7 && !getBGValue(row.get(7)).equals(new BigDecimal(0)))
 			this.luglio = getBGValue(row.get(7));
-		if(row.size()>8)
+		if(row.size()>8 && !getBGValue(row.get(8)).equals(new BigDecimal(0)))
 			this.agosto = getBGValue(row.get(8));
-		if(row.size()>9)
+		if(row.size()>9 && !getBGValue(row.get(9)).equals(new BigDecimal(0)))
 			this.settembre = getBGValue(row.get(9));
-		if(row.size()>10)
+		if(row.size()>10 && !getBGValue(row.get(10)).equals(new BigDecimal(0)))
 			this.ottobre = getBGValue(row.get(10));
-		if(row.size()>11)
+		if(row.size()>11 && !getBGValue(row.get(11)).equals(new BigDecimal(0)))
 			this.novembre = getBGValue(row.get(11));
-		if(row.size()>12)
+		if(row.size()>12 && !getBGValue(row.get(12)).equals(new BigDecimal(0)))
 			this.dicembre = getBGValue(row.get(12));
 		
 		this.year = year;

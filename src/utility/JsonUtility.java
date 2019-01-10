@@ -87,18 +87,30 @@ public class JsonUtility {
 		dicembre.put("SENA3", letturaSenA3.getDicembre());
 		
 		JSONArray result = new JSONArray();
-		result.add(gennaio);
-		result.add(febbraio);
-		result.add(marzo);
-		result.add(aprile);
-		result.add(maggio);
-		result.add(giugno);
-		result.add(luglio);
-		result.add(agosto);
-		result.add(settembre);
-		result.add(ottobre);
-		result.add(novembre);
-		result.add(dicembre);
+		if(!gennaio.get("SENA1").toString().equals("0"))
+			result.add(gennaio);
+		if(!febbraio.get("SENA1").toString().equals("0"))
+			result.add(febbraio);
+		if(!marzo.get("SENA1").toString().equals("0"))
+			result.add(marzo);
+		if(!aprile.get("SENA1").toString().equals("0"))
+			result.add(aprile);
+		if(!maggio.get("SENA1").toString().equals("0"))
+			result.add(maggio);
+		if(!giugno.get("SENA1").toString().equals("0"))
+			result.add(giugno);
+		if(!luglio.get("SENA1").toString().equals("0"))
+			result.add(luglio);
+		if(!agosto.get("SENA1").toString().equals("0"))
+			result.add(agosto);
+		if(!settembre.get("SENA1").toString().equals("0"))
+			result.add(settembre);
+		if(!ottobre.get("SENA1").toString().equals("0"))
+			result.add(ottobre);
+		if(!novembre.get("SENA1").toString().equals("0"))
+			result.add(novembre);
+		if(!dicembre.get("SENA1").toString().equals("0"))
+			result.add(dicembre);
 		
 		return result;
 	}
@@ -154,18 +166,30 @@ public class JsonUtility {
 		dicembre.put("ENI", lettura.getDicembre());
 		
 		JSONArray result = new JSONArray();
-		result.add(gennaio);
-		result.add(febbraio);
-		result.add(marzo);
-		result.add(aprile);
-		result.add(maggio);
-		result.add(giugno);
-		result.add(luglio);
-		result.add(agosto);
-		result.add(settembre);
-		result.add(ottobre);
-		result.add(novembre);
-		result.add(dicembre);
+		if(!gennaio.get("ENI").toString().equals("0"))
+			result.add(gennaio);
+		if(!febbraio.get("ENI").toString().equals("0"))
+			result.add(febbraio);
+		if(!marzo.get("ENI").toString().equals("0"))
+			result.add(marzo);
+		if(!aprile.get("ENI").toString().equals("0"))
+			result.add(aprile);
+		if(!maggio.get("ENI").toString().equals("0"))
+			result.add(maggio);
+		if(!giugno.get("ENI").toString().equals("0"))
+			result.add(giugno);
+		if(!luglio.get("ENI").toString().equals("0"))
+			result.add(luglio);
+		if(!agosto.get("ENI").toString().equals("0"))
+			result.add(agosto);
+		if(!settembre.get("ENI").toString().equals("0"))
+			result.add(settembre);
+		if(!ottobre.get("ENI").toString().equals("0"))
+			result.add(ottobre);
+		if(!novembre.get("ENI").toString().equals("0"))
+			result.add(novembre);
+		if(!dicembre.get("ENI").toString().equals("0"))
+			result.add(dicembre);
 		
 		return result;
 	}
@@ -221,18 +245,30 @@ public class JsonUtility {
 		dicembre.put("ABC", lettura.getDicembre());
 		
 		JSONArray result = new JSONArray();
-		result.add(gennaio);
-		result.add(febbraio);
-		result.add(marzo);
-		result.add(aprile);
-		result.add(maggio);
-		result.add(giugno);
-		result.add(luglio);
-		result.add(agosto);
-		result.add(settembre);
-		result.add(ottobre);
-		result.add(novembre);
-		result.add(dicembre);
+		if(!gennaio.get("ABC").toString().equals("0"))
+			result.add(gennaio);
+		if(!febbraio.get("ABC").toString().equals("0"))
+			result.add(febbraio);
+		if(!marzo.get("ABC").toString().equals("0"))
+			result.add(marzo);
+		if(!aprile.get("ABC").toString().equals("0"))
+			result.add(aprile);
+		if(!maggio.get("ABC").toString().equals("0"))
+			result.add(maggio);
+		if(!giugno.get("ABC").toString().equals("0"))
+			result.add(giugno);
+		if(!luglio.get("ABC").toString().equals("0"))
+			result.add(luglio);
+		if(!agosto.get("ABC").toString().equals("0"))
+			result.add(agosto);
+		if(!settembre.get("ABC").toString().equals("0"))
+			result.add(settembre);
+		if(!ottobre.get("ABC").toString().equals("0"))
+			result.add(ottobre);
+		if(!novembre.get("ABC").toString().equals("0"))
+			result.add(novembre);
+		if(!dicembre.get("ABC").toString().equals("0"))
+			result.add(dicembre);
 		
 		return result;
 	}
@@ -306,9 +342,9 @@ public class JsonUtility {
 		return result;
 	}
 
-	public static void writeFileFromJSONArray(JSONArray array, String nameFile) throws IOException {
+	public static void writeFileFromJSONArray(JSONArray array, String nameFile, String folder) throws IOException {
 		//StringWriter out = new StringWriter();
-		FileWriter file = new FileWriter( "reports/"+nameFile+".json",false);
+		FileWriter file = new FileWriter( folder.concat("/").concat(nameFile).concat(".json"),false);
 		StringWriter out = new StringWriter();
 		array.writeJSONString(out);
 		file.write(out.toString());

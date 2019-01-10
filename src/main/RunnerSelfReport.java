@@ -31,6 +31,7 @@ public class RunnerSelfReport {
 	};
 
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
+		String folder = args[0];
 		// Build a new authorized API client service.
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 		final String spreadsheetId = props.getProperty("spreadsheetIdAutolettura");
@@ -79,7 +80,7 @@ public class RunnerSelfReport {
 				sen.add(senMonth);
 			}
 		}
-		JsonUtility.writeFileFromJSONArray(sen, "SEN");
+		JsonUtility.writeFileFromJSONArray(sen, "SEN", folder);
 
 		JSONArray eni = new JSONArray();
 		for(Lettura letturaEni : vecEni) {
@@ -89,7 +90,7 @@ public class RunnerSelfReport {
 				eni.add(eniMonth);
 			}
 		}
-		JsonUtility.writeFileFromJSONArray(eni, "ENI");
+		JsonUtility.writeFileFromJSONArray(eni, "ENI", folder);
 
 		JSONArray abc = new JSONArray();
 		for(Lettura letturaAbc : vecAbc) {
@@ -99,7 +100,7 @@ public class RunnerSelfReport {
 				abc.add(abcMonth);
 			}
 		}
-		JsonUtility.writeFileFromJSONArray(abc, "ABC");
+		JsonUtility.writeFileFromJSONArray(abc, "ABC", folder);
 		System.out.println("Finito!");
 	}
 }
