@@ -3,6 +3,7 @@ package utility;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import entity.ElementoLista;
 import entity.InfoUtenza;
 import entity.Lettura;
 import prova.ProvaMainClass;
@@ -79,6 +81,28 @@ public class GoogleUtility {
 			}
 		}
 		return null;
+    }
+    
+    public static List<ElementoLista> getElementiListaByRange(String spreadsheetId, String range, NetHttpTransport HTTP_TRANSPORT, String reparto) throws IOException {
+    	List<ElementoLista> result = new ArrayList<ElementoLista>();
+    	Sheets service = new Sheets.Builder(HTTP_TRANSPORT, GoogleUtility.JSON_FACTORY, GoogleUtility.getCredentials(HTTP_TRANSPORT))
+				.setApplicationName(GoogleUtility.APPLICATION_NAME).build();
+		ValueRange response = service.spreadsheets().values().get(spreadsheetId, range).execute();
+		List<List<Object>> values = response.getValues();
+		if (values == null || values.isEmpty()) {
+			System.out.println("No data found.");
+			return null;
+		} else {
+			for (List row : values) {
+				ElementoLista elemento = new ElementoLista(row);
+				if(elemento!=null && elemento.getTipo()!=null) {
+					elemento.setReparto(reparto);
+					System.out.println(elemento);
+					result.add(elemento);
+				}
+			}
+		}
+		return result;
     }
 
 }
