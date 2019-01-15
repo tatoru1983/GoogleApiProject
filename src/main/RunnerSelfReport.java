@@ -30,6 +30,7 @@ public class RunnerSelfReport {
 		}
 	};
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
 		String folder = args[0];
 		// Build a new authorized API client service.

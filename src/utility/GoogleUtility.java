@@ -97,7 +97,6 @@ public class GoogleUtility {
 				ElementoLista elemento = new ElementoLista(row);
 				if(elemento!=null && elemento.getTipo()!=null) {
 					elemento.setReparto(reparto);
-					System.out.println(elemento);
 					result.add(elemento);
 				}
 			}

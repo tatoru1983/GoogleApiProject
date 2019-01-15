@@ -2,14 +2,18 @@ package main;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import org.json.simple.JSONArray;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
 import entity.ElementoLista;
 import utility.GoogleUtility;
+import utility.JsonUtility;
 import utility.PropertiesUtility;
 
 public class RunnerItemList {
@@ -24,6 +28,7 @@ public class RunnerItemList {
 		}
 	};
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
 		String folder = args[0];
 		// Build a new authorized API client service.
@@ -49,6 +54,20 @@ public class RunnerItemList {
 		//Reparto2
 		range = balconeReparto2.concat("!A2:C200");
 		List<ElementoLista> listBalconeRep2 = GoogleUtility.getElementiListaByRange(spreadsheetIdBalcone, range, HTTP_TRANSPORT, balconeReparto2);
-	}
+		
 
+		List<ElementoLista> listGarage = new ArrayList<ElementoLista>();
+		List<ElementoLista> listBalcone = new ArrayList<ElementoLista>();
+		
+		listGarage.addAll(listGarageRep1);
+		listGarage.addAll(listGarageRep2);
+		
+		listBalcone.addAll(listBalconeRep1);
+		listBalcone.addAll(listBalconeRep2);
+		
+		JSONArray items = JsonUtility.getJSONItems(listGarage, listBalcone);
+		
+		JsonUtility.writeFileFromJSONArray(items, "items", folder);
+		System.out.println("Finito!");
+	}
 }

@@ -3,10 +3,12 @@ package utility;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import entity.ElementoLista;
 import entity.InfoUtenza;
 import entity.Lettura;
 
@@ -338,6 +340,39 @@ public class JsonUtility {
 		result.add(ottobre);
 		result.add(novembre);
 		result.add(dicembre);
+		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray getJSONItems(List<ElementoLista> listGarage, List<ElementoLista> listBalcone) {
+		JSONArray result = new JSONArray();
+		JSONArray resultGarage = new JSONArray();
+		JSONArray resultBacone = new JSONArray();
+		
+		for (ElementoLista elementoListaGarage : listGarage) {
+			JSONObject garageItem = new JSONObject();
+			garageItem.put("reparto", elementoListaGarage.getReparto());
+			garageItem.put("tipo", elementoListaGarage.getTipo());
+			garageItem.put("marca", elementoListaGarage.getMarca());
+			garageItem.put("qta", elementoListaGarage.getQta());
+			resultGarage.add(garageItem);
+		}
+		for (ElementoLista elementoListaBalcone : listBalcone) {
+			JSONObject balconeItem = new JSONObject();
+			balconeItem.put("reparto", elementoListaBalcone.getReparto());
+			balconeItem.put("tipo", elementoListaBalcone.getTipo());
+			balconeItem.put("marca", elementoListaBalcone.getMarca());
+			balconeItem.put("qta", elementoListaBalcone.getQta());
+			resultBacone.add(balconeItem);
+		}
+		JSONObject garage = new JSONObject();
+		garage.put("garage", resultGarage);
+		JSONObject balcone = new JSONObject();
+		balcone.put("balcone", resultBacone);
+		
+		result.add(garage);
+		result.add(balcone);
 		
 		return result;
 	}
