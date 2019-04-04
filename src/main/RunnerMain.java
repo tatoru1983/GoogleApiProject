@@ -19,6 +19,9 @@ public class RunnerMain {
 		case "ITEM_LIST":
 			RunnerItemList.main(argsStep);
 			break;
+		case "MEDICINE_LIST":
+			RunnerMedicineList.main(argsStep);
+			break;
 		}
 	}
 

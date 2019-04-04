@@ -3,6 +3,7 @@ package utility;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -11,6 +12,7 @@ import org.json.simple.JSONObject;
 import entity.ElementoLista;
 import entity.InfoUtenza;
 import entity.Lettura;
+import entity.Medicina;
 
 public class JsonUtility {
 
@@ -373,6 +375,22 @@ public class JsonUtility {
 		
 		result.add(garage);
 		result.add(balcone);
+		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray getJSONItems(List<Medicina> listMedicine) {
+		JSONArray result = new JSONArray();
+		
+		for (Medicina medicina : listMedicine) {
+			JSONObject item = new JSONObject();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			item.put("marca", medicina.getMarca());
+			item.put("tipo", medicina.getTipo());
+			item.put("scadenza", formatter.format(medicina.getScadenza()));
+			result.add(item);
+		}
 		
 		return result;
 	}

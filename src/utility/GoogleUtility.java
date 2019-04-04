@@ -23,6 +23,7 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 import entity.ElementoLista;
 import entity.InfoUtenza;
 import entity.Lettura;
+import entity.Medicina;
 import prova.ProvaMainClass;
 
 public class GoogleUtility {
@@ -98,6 +99,26 @@ public class GoogleUtility {
 				if(elemento!=null && elemento.getTipo()!=null) {
 					elemento.setReparto(reparto);
 					result.add(elemento);
+				}
+			}
+		}
+		return result;
+    }
+    
+    public static List<Medicina> getMedicineByRange(String spreadsheetId, String range, NetHttpTransport HTTP_TRANSPORT) throws IOException {
+    	List<Medicina> result = new ArrayList<Medicina>();
+    	Sheets service = new Sheets.Builder(HTTP_TRANSPORT, GoogleUtility.JSON_FACTORY, GoogleUtility.getCredentials(HTTP_TRANSPORT))
+				.setApplicationName(GoogleUtility.APPLICATION_NAME).build();
+		ValueRange response = service.spreadsheets().values().get(spreadsheetId, range).execute();
+		List<List<Object>> values = response.getValues();
+		if (values == null || values.isEmpty()) {
+			System.out.println("No data found.");
+			return null;
+		} else {
+			for (List row : values) {
+				Medicina medicina = new Medicina(row);
+				if(medicina!=null && medicina.getTipo()!=null) {
+					result.add(medicina);
 				}
 			}
 		}
