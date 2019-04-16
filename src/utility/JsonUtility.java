@@ -1,5 +1,7 @@
 package utility;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -8,6 +10,8 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import entity.ElementoLista;
 import entity.InfoUtenza;
@@ -402,5 +406,86 @@ public class JsonUtility {
 		array.writeJSONString(out);
 		file.write(out.toString());
 		file.close();
+	}
+	
+	public static JSONObject getGarage(String folder, String itemsName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(itemsName));
+        Object obj = parser.parse(f);
+		JSONArray jsonObject = (JSONArray) obj;
+		JSONObject garage = (JSONObject) jsonObject.get(0);
+		return garage;
+	}
+	
+	public static JSONObject getBalcone(String folder, String itemsName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(itemsName));
+        Object obj = parser.parse(f);
+		JSONArray jsonObject = (JSONArray) obj;
+		JSONObject balcone = (JSONObject) jsonObject.get(1);
+		return balcone;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONObject getABC(String folder, String abcName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(abcName));
+        Object obj = parser.parse(f);
+		JSONArray abcArray = (JSONArray) obj;
+		JSONObject abc = new JSONObject();
+		abc.put("abc", abcArray);
+		return abc;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject getENI(String folder, String eniName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(eniName));
+        Object obj = parser.parse(f);
+        JSONArray eniArray = (JSONArray) obj;
+		JSONObject eni = new JSONObject();
+		eni.put("eni", eniArray);
+		return eni;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject getSEN(String folder, String senName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(senName));
+        Object obj = parser.parse(f);
+        JSONArray senArray = (JSONArray) obj;
+		JSONObject sen = new JSONObject();
+		sen.put("sen", senArray);
+		return sen;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject getSpese(String folder, String speseName) throws IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		FileReader f = new FileReader(folder.concat("/").concat(speseName));
+		Object obj = parser.parse(f);
+		JSONArray speseArray = (JSONArray) obj;
+		int currentYear = DataUtility.getCurrentYear().intValue();
+		JSONObject year = new JSONObject();
+		JSONArray yearArray = new JSONArray();
+		for(int j = 0; j < speseArray.size(); j++) {
+			JSONObject speseArrayJ = (JSONObject) speseArray.get(j);
+			if(speseArrayJ.get("label").toString().contains(String.valueOf(currentYear))) {
+				yearArray.add(speseArrayJ);
+			}
+		}
+		year.put("spese".concat(String.valueOf(currentYear)), yearArray);
+		return year;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject getMedicines(String folder, String medicinesName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(medicinesName));
+        Object obj = parser.parse(f);
+		JSONArray medicinesArray = (JSONArray) obj;
+		JSONObject medicines = new JSONObject();
+		medicines.put("medicines", medicinesArray);
+		return medicines;
 	}
 }

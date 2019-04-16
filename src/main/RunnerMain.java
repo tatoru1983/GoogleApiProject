@@ -3,9 +3,11 @@ package main;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import org.json.simple.parser.ParseException;
+
 public class RunnerMain {
 
-	public static void main(String[] args) throws IOException, GeneralSecurityException {
+	public static void main(String[] args) throws IOException, GeneralSecurityException, ParseException {
 		String step = args[0];
 		String[] argsStep = {args[1]};
 		
@@ -21,6 +23,9 @@ public class RunnerMain {
 			break;
 		case "MEDICINE_LIST":
 			RunnerMedicineList.main(argsStep);
+			break;
+		case "AGGREGATE_JSONS":
+			RunnerAggregateJsons.main(argsStep);
 			break;
 		}
 	}
