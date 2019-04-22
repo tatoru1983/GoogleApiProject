@@ -474,7 +474,7 @@ public class JsonUtility {
 				yearArray.add(speseArrayJ);
 			}
 		}
-		year.put("spese".concat(String.valueOf(currentYear)), yearArray);
+		year.put("spese", yearArray);
 		return year;
 	}
 
