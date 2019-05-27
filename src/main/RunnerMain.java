@@ -24,6 +24,9 @@ public class RunnerMain {
 		case "MEDICINE_LIST":
 			RunnerMedicineList.main(argsStep);
 			break;
+		case "WINE_LIST":
+			RunnerWine.main(argsStep);
+			break;
 		case "AGGREGATE_JSONS":
 			RunnerAggregateJsons.main(argsStep);
 			break;

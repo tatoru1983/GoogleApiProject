@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -10,12 +11,13 @@ import org.json.simple.JSONArray;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
-import entity.Medicina;
+import entity.ElementoLista;
+import entity.Vino;
 import utility.GoogleUtility;
 import utility.JsonUtility;
 import utility.PropertiesUtility;
 
-public class RunnerMedicineList {
+public class RunnerWine {
 
 	private static Properties props;
 
@@ -34,15 +36,14 @@ public class RunnerMedicineList {
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 		String range = "";
 		//Garage
-		final String spreadsheetIdMedicine = props.getProperty("spreadsheetIdMedicine");
-		final String medicine = props.getProperty("sheetNameMedicine");
-		//Reparto1
-		range = medicine.concat("!A2:C300");
-		List<Medicina> listMedicine = GoogleUtility.getMedicineByRange(spreadsheetIdMedicine, range, HTTP_TRANSPORT);
+		final String spreadsheetIdGarage = props.getProperty("spreadsheetIdGarage");
+		final String vino = props.getProperty("sheetNameGarageVino");
+		range = vino.concat("!A2:J200");
+		List<Vino> listVino = GoogleUtility.getWineByRange(spreadsheetIdGarage, range, HTTP_TRANSPORT);
 		
-		JSONArray items = JsonUtility.getJSONMedicines(listMedicine);
+		JSONArray items = JsonUtility.getJSONWine(listVino);
 		
-		JsonUtility.writeFileFromJSONArray(items, "medicines", folder);
+		JsonUtility.writeFileFromJSONArray(items, "wine", folder);
 		System.out.println("Finito!");
 	}
 }

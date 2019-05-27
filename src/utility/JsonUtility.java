@@ -1,6 +1,5 @@
 package utility;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,6 +16,7 @@ import entity.ElementoLista;
 import entity.InfoUtenza;
 import entity.Lettura;
 import entity.Medicina;
+import entity.Vino;
 
 public class JsonUtility {
 
@@ -384,7 +384,7 @@ public class JsonUtility {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static JSONArray getJSONItems(List<Medicina> listMedicine) {
+	public static JSONArray getJSONMedicines(List<Medicina> listMedicine) {
 		JSONArray result = new JSONArray();
 		
 		for (Medicina medicina : listMedicine) {
@@ -393,6 +393,28 @@ public class JsonUtility {
 			item.put("marca", medicina.getMarca());
 			item.put("tipo", medicina.getTipo());
 			item.put("scadenza", formatter.format(medicina.getScadenza()));
+			result.add(item);
+		}
+		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray getJSONWine(List<Vino> listVino) {
+		JSONArray result = new JSONArray();
+		
+		for (Vino vino : listVino) {
+			JSONObject item = new JSONObject();
+			item.put("tipo", vino.getTipo());
+			item.put("denominazione", vino.getDenominazione());
+			item.put("colore", vino.getColore());
+			item.put("origine", vino.getOrigine());
+			item.put("vol", vino.getVol());
+			item.put("provenienza", vino.getProvenienza());
+			item.put("marca", vino.getMarca());
+			item.put("qta", vino.getQta());
+			item.put("altro", vino.getAltro());
+			item.put("annata", vino.getAnnata());
 			result.add(item);
 		}
 		
