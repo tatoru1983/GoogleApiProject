@@ -46,6 +46,9 @@ public class RunnerAggregateJsons {
         //medicines
 		String medicinesName = "medicines.json";
 		JSONObject medicines = JsonUtility.getMedicines(folder, medicinesName);
+        //medicines
+		String wineName = "wine.json";
+		JSONObject wine = JsonUtility.getWine(folder, wineName);
         
 		JSONArray fulljson = new JSONArray();
 		fulljson.add(garage);
@@ -55,6 +58,7 @@ public class RunnerAggregateJsons {
 		fulljson.add(sen);
 		fulljson.add(spese);
 		fulljson.add(medicines);
+		fulljson.add(wine);
 		
 		JsonUtility.writeFileFromJSONArray(fulljson, "fulljson", folder);
 		System.out.println("Finito!");

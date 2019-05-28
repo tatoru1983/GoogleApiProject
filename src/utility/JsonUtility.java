@@ -510,4 +510,15 @@ public class JsonUtility {
 		medicines.put("medicines", medicinesArray);
 		return medicines;
 	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject getWine(String folder, String wineName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        FileReader f = new FileReader(folder.concat("/").concat(wineName));
+        Object obj = parser.parse(f);
+		JSONArray wineArray = (JSONArray) obj;
+		JSONObject wine = new JSONObject();
+		wine.put("wine", wineArray);
+		return wine;
+	}
 }
