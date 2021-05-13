@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.api.client.auth.oauth2.Credential;
@@ -25,6 +27,7 @@ import entity.InfoUtenza;
 import entity.Lettura;
 import entity.Medicina;
 import entity.Vino;
+import entity.dylandog.Albo;
 import prova.ProvaMainClass;
 
 public class GoogleUtility {
@@ -144,6 +147,40 @@ public class GoogleUtility {
 			}
 		}
 		return result;
+    }
+    
+    public static List<Albo> getDylanDogByRange(String spreadsheetId, String range, NetHttpTransport HTTP_TRANSPORT) throws IOException {
+    	List<Albo> result = new ArrayList<Albo>();
+    	Sheets service = new Sheets.Builder(HTTP_TRANSPORT, GoogleUtility.JSON_FACTORY, GoogleUtility.getCredentials(HTTP_TRANSPORT))
+				.setApplicationName(GoogleUtility.APPLICATION_NAME).build();
+		ValueRange response = service.spreadsheets().values().get(spreadsheetId, range).execute();
+		List<List<Object>> values = response.getValues();
+		if (values == null || values.isEmpty()) {
+			System.out.println("No data found.");
+			return null;
+		} else {
+			List<String> artistaString = new ArrayList<String>();
+			
+			//primo ciclo, scorro gli artisti
+			for (List row : values) {
+				if(row.size()>3 && row.get(3)!=null)
+					artistaString.add(row.get(3).toString());
+				if(row.size()>4 && row.get(4)!=null)
+					artistaString.add(row.get(4).toString());
+				if(row.size()>5 && row.get(5)!=null)
+					artistaString.add(row.get(5).toString());
+				if(row.size()>6 && row.get(6)!=null)
+					artistaString.add(row.get(6).toString());
+			}
+			HashMap artistaHash = AggregationUtility.getHashArtistaFromListString(artistaString);
+			
+			//secondo ciclo, costruisco gli albi
+			for (List row : values) {
+				Albo albo = new Albo(row, artistaHash);
+				result.add(albo);
+			}
+		}
+    	return result;
     }
 
 }

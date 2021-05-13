@@ -17,6 +17,8 @@ import entity.InfoUtenza;
 import entity.Lettura;
 import entity.Medicina;
 import entity.Vino;
+import entity.dylandog.Albo;
+import entity.dylandog.Artista;
 
 public class JsonUtility {
 
@@ -418,6 +420,49 @@ public class JsonUtility {
 			result.add(item);
 		}
 		
+		return result;
+	}
+	
+	public static JSONArray getJSONDylanDog(List<Albo> listDylanDog) {
+		JSONArray result = new JSONArray();
+		
+		for (Albo albo : listDylanDog) {
+			JSONObject item = new JSONObject();
+			item.put("numero", albo.getNumero());
+			item.put("titolo", albo.getTitolo());
+			item.put("edizione", albo.getEdizione()!=null ? albo.getEdizione().toString() : null);
+			item.put("anno", albo.getAnno());
+			item.put("check", albo.isCheck() ? "S" : "N");
+
+			JSONArray soggettoArray = new JSONArray();
+			for(Artista artista : albo.getSoggetto()) {
+				soggettoArray.add(artista.getNomeCognome());
+			}
+			item.put("soggetto", soggettoArray);
+
+			JSONArray sceneggiaturaArray = new JSONArray();
+			for(Artista artista : albo.getSceneggiatura()) {
+				sceneggiaturaArray.add(artista.getNomeCognome());
+			}
+			item.put("sceneggiatura", sceneggiaturaArray);
+
+			JSONArray disegniArray = new JSONArray();
+			for(Artista artista : albo.getDisegni()) {
+				disegniArray.add(artista.getNomeCognome());
+			}
+			item.put("disegni", disegniArray);
+
+			JSONArray copertinaArray = new JSONArray();
+			if(albo.getCopertina()!=null) {
+				for(Artista artista : albo.getCopertina()) {
+					copertinaArray.add(artista.getNomeCognome());
+				}
+			}
+			item.put("copertina", copertinaArray);
+			
+			result.add(item);
+		}
+
 		return result;
 	}
 
