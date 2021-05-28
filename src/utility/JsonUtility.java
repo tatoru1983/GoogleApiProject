@@ -433,6 +433,7 @@ public class JsonUtility {
 			item.put("edizione", albo.getEdizione()!=null ? albo.getEdizione().toString() : null);
 			item.put("anno", albo.getAnno());
 			item.put("check", albo.isCheck() ? "S" : "N");
+			item.put("immagine", albo.getImmagine());
 
 			JSONArray soggettoArray = new JSONArray();
 			for(Artista artista : albo.getSoggetto()) {

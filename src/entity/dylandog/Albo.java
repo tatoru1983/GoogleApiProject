@@ -6,20 +6,21 @@ import java.util.List;
 import utility.AggregationUtility;
 
 public class Albo {
-	
+
 	private String numero;
 	private String titolo;
 	private EdizioneEnum edizione;
 	private int anno;
-	
+	private String immagine;
+
 	private List<Artista> soggetto;
 	private List<Artista> sceneggiatura;
 	private List<Artista> disegni;
 	private List<Artista> copertina;
-	
+
 	private boolean check = false;
-	
-	
+
+
 	public Albo(List row, HashMap artistaHash) {
 		super();
 		if(row!=null || row.size()>0) {
@@ -29,15 +30,18 @@ public class Albo {
 				this.numero = row.get(1).toString();
 			if(row.size()>2)
 				this.titolo = row.get(2).toString();
-			if(row.size()>7 && row.get(7)!=null && !"".contentEquals(row.get(7).toString()))
+			if(row.size()>7 && row.get(7)!=null && !"".contentEquals(row.get(7).toString())) {
 				try {
 					this.edizione = EdizioneEnum.get(row.get(7).toString());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}
 			if(row.size()>8)
 				this.anno = Integer.parseInt(row.get(8).toString());
-			
+			if(row.size()>9)
+				this.immagine = row.get(9).toString();
+
 			//valori lista
 			if(row.size()>3 && row.get(3)!=null && !"".contentEquals(row.get(3).toString()))
 				this.soggetto = AggregationUtility.getArtistaFromString(row.get(3).toString());
@@ -49,7 +53,7 @@ public class Albo {
 				this.copertina = AggregationUtility.getArtistaFromString(row.get(6).toString());
 		}
 	}
-	
+
 	public boolean isCheck() {
 		return check;
 	}
@@ -112,6 +116,14 @@ public class Albo {
 		return "Albo [numero=" + numero + ", titolo=" + titolo + ", edizione=" + edizione + ", anno=" + anno
 				+ ", soggetto=" + soggetto + ", sceneggiatura=" + sceneggiatura + ", disegni=" + disegni
 				+ ", copertina=" + copertina + ", check=" + check + "]";
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 
 }

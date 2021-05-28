@@ -36,7 +36,7 @@ public class RunnerDylanDog {
 		//Garage
 		final String spreadsheetIdGarage = props.getProperty("spreadsheetIdDylanDog");
 		final String albi = props.getProperty("sheetNameDylanDogAlbi");
-		range = albi.concat("!A2:I600");
+		range = albi.concat("!A2:J600");
 		
 		List<Albo> listDylanDog = GoogleUtility.getDylanDogByRange(spreadsheetIdGarage, range, HTTP_TRANSPORT);
 		
