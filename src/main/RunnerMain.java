@@ -28,7 +28,7 @@ public class RunnerMain {
 			RunnerWine.main(argsStep);
 			break;
 		case "DYLAN_DOG":
-			RunnerWine.main(argsStep);
+			RunnerDylanDog.main(argsStep);
 			break;
 		case "AGGREGATE_JSONS":
 			RunnerAggregateJsons.main(argsStep);
